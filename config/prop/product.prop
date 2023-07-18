@@ -1,1 +1,4 @@
 persist.device_config.runtime_native.usap_pool_enabled=false
+
+ro.product.vendor.name=chopin_global
+ro.product.vendor.device=chopin
