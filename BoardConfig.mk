@@ -155,11 +155,6 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_COPY_OUT_PRODUCT := product
-ifeq ($(IS_GLOBAL),true)
-BOARD_PREBUILT_VENDORIMAGE := $(CHOPIN_PREBUILT)/vendor/Global/vendor.img
-else
-BOARD_PREBUILT_VENDORIMAGE := $(CHOPIN_PREBUILT)/vendor/China/vendor.img
-endif
 
 # Partitions (Dynamic)
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
@@ -201,4 +196,10 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)/releasetools
 BOARD_VNDK_VERSION := current
 
 # VINTF
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/config/vintf/compatibility_matrix.device.xml
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+	$(DEVICE_PATH)/config/vintf/compatibility_matrix.device.xml \
+	vendor/lineage/config/device_framework_matrix.xml
+
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+
