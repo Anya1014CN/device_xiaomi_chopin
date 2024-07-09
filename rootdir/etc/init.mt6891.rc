@@ -24,3 +24,10 @@ on property:dev.bootcomplete=1
 
 on property:persist.sys.MT6891.dt2w=*
     exec /system/bin/xiaomi-touch 14 ${persist.sys.MT6891.dt2w}
+
+on property:sys.boot_completed=1
+    chmod 0640 /sys/fs/selinux/enforce
+    chmod 0440 /sys/fs/selinux/policy
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "schedutil"
+    write /sys/devices/system/cpu/cpufreq/policy4/scaling_governor "schedutil"
+    write /sys/devices/system/cpu/cpufreq/policy7/scaling_governor "schedutil"
