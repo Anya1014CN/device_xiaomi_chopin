@@ -15,6 +15,9 @@ ro.vendor.cabc.enable=true
 # Blur
 ro.surface_flinger.supports_background_blur=1
 
+# Charger
+ro.charger.enable_suspend=true
+
 # Disable blur on app launch
 ro.launcher.blur.appLaunch=1
 
