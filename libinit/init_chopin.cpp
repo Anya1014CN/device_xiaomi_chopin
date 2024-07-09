@@ -27,7 +27,10 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <cstdlib>
 #include <fstream>
+#include <string.h>
+#include <sys/sysinfo.h>
 #include <unistd.h>
 #include <vector>
 
@@ -36,10 +39,21 @@
 #include <sys/_system_properties.h>
 #include <sys/sysinfo.h>
 
+#include <android-base/logging.h>
 #include "property_service.h"
 #include "vendor_init.h"
 
 using android::base::GetProperty;
+using std::string;
+
+std::vector<std::string> ro_props_default_source_order = {
+    "",
+    "odm.",
+    "product.",
+    "system.",
+    "system_ext.",
+    "vendor.",
+};
 
 void property_override(char const prop[], char const value[], bool add = true) {
     prop_info *pi;
@@ -49,6 +63,19 @@ void property_override(char const prop[], char const value[], bool add = true) {
         __system_property_update(pi, value, strlen(value));
     } else if (add) {
         __system_property_add(prop, strlen(prop), value, strlen(value));
+    }
+}
+
+void set_ro_build_prop(const std::string &prop, const std::string &value, bool product = true) {
+    string prop_name;
+
+    for (const auto &source : ro_props_default_source_order) {
+        if (product)
+            prop_name = "ro.product." + source + prop;
+        else
+            prop_name = "ro." + source + "build." + prop;
+
+        property_override(prop_name.c_str(), value.c_str());
     }
 }
 
@@ -110,4 +137,57 @@ void vendor_load_properties() {
     } else if (region.find("Global") != std::string::npos) {
         load_choping();
     }
+}
+
+
+
+
+
+std::vector<std::string> ro_props_default_source_order = {
+    "",
+    "odm.",
+    "product.",
+    "system.",
+    "system_ext.",
+    "vendor.",
+};
+
+void property_override(string prop, string value)
+{
+    auto pi = (prop_info*) __system_property_find(prop.c_str());
+
+    if (pi != nullptr)
+        __system_property_update(pi, value.c_str(), value.size());
+    else
+        __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
+}
+
+void set_ro_build_prop(const std::string &prop, const std::string &value, bool product = true) {
+    string prop_name;
+
+    for (const auto &source : ro_props_default_source_order) {
+        if (product)
+            prop_name = "ro.product." + source + prop;
+        else
+            prop_name = "ro." + source + "build." + prop;
+
+        property_override(prop_name.c_str(), value.c_str());
+    }
+}
+
+void vendor_load_properties()
+{
+    std::string sku = android::base::GetProperty("ro.boot.product.hardware.sku", "");
+    bool isAres = !strcmp(sku.c_str(), "ares");
+
+    LOG(INFO) << "libinit_ares : sku=" << sku;
+
+    property_override("ro.device", sku);
+    property_override("ro.product.board", sku);
+    set_ro_build_prop("device", sku);
+    set_ro_build_prop("model", isAres ? "Redmi K40 Gaming" : "POCO F3 GT");
+    set_ro_build_prop("name", sku);
+    set_ro_build_prop("brand", isAres ? "Redmi" : "POCO");
+    set_ro_build_prop("marketname", isAres ? "Redmi K40 Gaming" : "POCO F3 GT");
+    set_ro_build_prop("product", sku, false);
 }

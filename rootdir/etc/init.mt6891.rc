@@ -31,3 +31,29 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy4/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy7/scaling_governor "schedutil"
+
+service nfc_hal_service /vendor/bin/hw/android.hardware.nfc@1.2-service.st
+    override
+    disabled
+    class hal
+    user nfc
+    group nfc
+
+service secure_element_hal_service /vendor/bin/hw/android.hardware.secure_element@1.2-service.st
+    override
+    disabled
+    class hal
+    user secure_element
+    group secure_element nfc
+
+on property:ro.boot.product.hardware.sku=chopin
+    start secure_element_hal_service
+    start nfc_hal_service
+
+on property:ro.boot.product.hardware.sku=chopinin
+    stop secure_element_hal_service
+    stop nfc_hal_service
+
+on property:ro.boot.product.hardware.sku=choping
+    stop secure_element_hal_service
+    stop nfc_hal_service
