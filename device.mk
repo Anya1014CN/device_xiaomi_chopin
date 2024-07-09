@@ -187,7 +187,7 @@ PRODUCT_COPY_FILES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.lights-service.chopin
+    android.hardware.lights-service.xiaomi_mt6893
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
