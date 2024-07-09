@@ -140,7 +140,7 @@ BOARD_USES_METADATA_PARTITION := true
 
 # Nfc
 ODM_MANIFEST_SKUS += chopin
-ODM_MANIFEST_CHOPIN_FILES := $(DEVICE_PATH)/configs/manifest_chopin.xml
+ODM_MANIFEST_CHOPIN_FILES := $(DEVICE_PATH)/config/manifest_chopin.xml
 
 # Partitions size
 BOARD_FLASH_BLOCK_SIZE := 131072
