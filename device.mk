@@ -50,6 +50,21 @@ TARGET_SCREEN_WIDTH := 1080
 
 # Audio
 PRODUCT_COPY_FILES += \
+    android.hardware.audio@6.0-impl \
+    android.hardware.bluetooth.audio@2.0-impl \
+    android.hardware.audio.effect@6.0-impl \
+    audio.a2dp.default \
+    audio_policy.stub \
+    audio.r_submix.default \
+    audio.usb.default
+    audio.bluetooth.default \
+    audio.usb.default \
+    libalsautils \
+    libaudiofoundation.vendor \
+    libbluetooth_audio_session \
+    libtinycompress \
+    libaudio-resampler \
+    libaudiopolicyengineconfigurable
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_in_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/a2dp_in_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration.xml:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PRODUCT_TARGET_VNDK_VERSION)/etc/bluetooth_audio_policy_configuration.xml
@@ -90,8 +105,13 @@ PRODUCT_PACKAGES += \
 
 # fastbootd
 PRODUCT_PACKAGES += \
-    fastbootd \
-    android.hardware.fastboot@1.0-impl-mock
+    fastbootd
+
+# Health
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-impl.recovery \
+    android.hardware.health@2.1-service
 
 # Fstab in ramdisk
 PRODUCT_PACKAGES += \
@@ -109,6 +129,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hidl.base@1.0 \
     android.hidl.manager@1.0 \
+    android.hidl.memory.block@1.0.vendor \
+    android.hidl.memory.block@1.0 \
+    libhwbinder \
+    libhwbinder.vendor \
+    libhidltransport.vendor \
     libhidltransport
 
 # IMS
@@ -196,7 +221,10 @@ PRODUCT_PACKAGES += \
     init.recovery.mt6891.rc \
     init.recovery.mt6893.rc \
     init.recovery.usb.rc \
+    init.mt6893.rc \
     init.mt6891.rc
+
+PRODUCT_COPY_FILES +=  $(DEVICE_PATH)/rootdir/etc/fstab.mt6893:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/30/etc/fstab.mt6893
 
 # Screen density
 PRODUCT_AAPT_CONFIG := xxxhdpi
@@ -223,3 +251,173 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
+
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    android.hardware.thermal@2.0.vendor
+
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.1.vendor \
+    android.hardware.usb.gadget@1.1.vendor
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator-V1-ndk_platform.vendor
+
+# Wi-Fi
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service-lazy \
+    android.hardware.wifi.supplicant@1.3.vendor \
+    android.hardware.wifi.hostapd@1.2.vendor \
+    libkeystore-engine-wifi-hidl:64 \
+    libkeystore-wifi-hidl
+
+# Tethering
+PRODUCT_PACKAGES += \
+    android.hardware.tetheroffload.config@1.0.vendor \
+    android.hardware.tetheroffload.control@1.0.vendor
+
+# Secure element
+PRODUCT_PACKAGES += \
+    android.hardware.secure_element@1.2.vendor
+
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@2.0-ScopedWakelock.vendor \
+    android.hardware.sensors@2.0.vendor \
+    libsensorndkbridge
+
+# IR
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-service \
+    android.hardware.ir@1.0-impl \
+    android.hardware.ir@1.0.vendor \
+    android.hardware.ir@1.0
+
+# Soundtrigger
+PRODUCT_PACKAGES += \
+    android.hardware.soundtrigger@2.3-impl
+
+# Memtrack
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
+
+# Neutral Networks
+PRODUCT_PACKAGES += \
+    android.hardware.neuralnetworks@1.3.vendor
+
+# Power
+PRODUCT_PACKAGES += \
+    android.hardware.power-V1-ndk_platform.vendor \
+    android.hardware.power@1.3.vendor
+
+# Radio
+PRODUCT_PACKAGES += \
+    android.hardware.radio@1.5.vendor \
+    android.hardware.radio.config@1.2.vendor \
+    android.hardware.radio.deprecated@1.0.vendor \
+    android.hardware.radio.config@1.0 \
+    android.hardware.radio@1.0 \
+    android.hardware.radio@1.1 \
+    android.hardware.radio@1.2 \
+    android.hardware.radio@1.3 \
+    android.hardware.radio@1.4
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    libkeymaster4.vendor:64 \
+    libkeymaster4support.vendor:64 \
+    libkeymaster_portable.vendor:64 \
+    libkeymaster_messages.vendor:64 \
+    libsoft_attestation_cert.vendor:64 \
+    libpuresoftkeymasterdevice.vendor:64
+
+# Fingerprint
+PRODUCT_PACKAGES += \
+    android.hardware.biometrics.fingerprint@2.1.vendor \
+    android.hardware.biometrics.fingerprint@2.2.vendor \
+    android.hardware.biometrics.fingerprint@2.3.vendor
+
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service
+
+# GPS
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@2.1.vendor
+
+# Graphics
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.composer@2.2-service
+
+# Camera
+PRODUCT_PACKAGES += \
+    android.hardware.camera.common@1.0.vendor \
+    android.hardware.camera.device@3.6.vendor \
+    android.hardware.camera.provider@2.6.vendor
+
+# CAS
+PRODUCT_PACKAGES += \
+    android.hardware.cas@1.2-service
+
+# DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.4-service.clearkey \
+    android.hardware.drm@1.3.vendor \
+    libmockdrmcryptoplugin \
+    libdrm.vendor \
+    libdrm
+
+# RenderScript
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
+# Hardware trigger
+PRODUCT_PACKAGES += \
+    android.hardwareundtrigger@2.0 \
+    android.hardwareundtrigger@2.1 \
+    android.hardwareundtrigger@2.2
+
+# Dumpstate
+PRODUCT_PACKAGES += \
+    android.hardware.dumpstate@1.1.vendor
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.1.vendor
+
+# TinyXML
+PRODUCT_PACKAGES += \
+    libtinyxml
+
+# Text classifier
+PRODUCT_PACKAGES += \
+    libtextclassifier_hash.vendor \
+    libtextclassifier_hash
+
+# Vendor service
+PRODUCT_PACKAGES += \
+    vndservice \
+    vndservicemanager
+
+# NQ Client
+PRODUCT_PACKAGES += \
+    libchrome.vendor
+
+# Additional libs
+PRODUCT_PACKAGES += \
+    libjsoncpp \
+    liblogwrap \
+    libmedialogservice \
+    libpcap \
+    libsparse \
+    libadbconnection_server \
+    libfusesideload \
+    libparameter \
+    libremote-processor \
+    libpcap.vendor \
+    libstagefright_softomx.vendor
