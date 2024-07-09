@@ -67,7 +67,7 @@ PRODUCT_COPY_FILES += \
     audio.a2dp.default \
     audio_policy.stub \
     audio.r_submix.default \
-    audio.usb.default
+    audio.usb.default \
     audio.bluetooth.default \
     audio.usb.default \
     libalsautils \
