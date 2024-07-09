@@ -998,4 +998,5 @@
           <item>200</item> <!--item>sensorRadius</item-->
     </array>
 
+    <string name="config_oemFastChargeNodePath">/sys/class/power_supply/usb/fastcharge_mode</string>
 </resources>
