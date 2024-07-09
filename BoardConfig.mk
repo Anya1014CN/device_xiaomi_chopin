@@ -176,7 +176,7 @@ TARGET_BOARD_PLATFORM := mt6893
 
 # Properties
 TARGET_PRODUCT_PROP += $(DEVICE_PATH)/config/prop/product.prop
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/prop/vendor.prop
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/config/prop/vendor.prop
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/config/prop/system.prop
 
 # Recovery
