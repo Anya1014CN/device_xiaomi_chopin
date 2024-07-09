@@ -289,7 +289,9 @@ PRODUCT_PACKAGES += \
 # Tethering
 PRODUCT_PACKAGES += \
     android.hardware.tetheroffload.config@1.0.vendor \
-    android.hardware.tetheroffload.control@1.0.vendor
+    android.hardware.tetheroffload.control@1.0.vendor \
+    TetheringConfigOverlayChopin \
+    WifiOverlayAres
 
 # Secure element
 PRODUCT_PACKAGES += \
