@@ -97,8 +97,7 @@ PRODUCT_PACKAGES += \
     multi_init.rc \
     init.recovery.hardware.rc \
     init.recovery.mt6891.rc \
-    init.recovery.mt6893.rc \
-    miui.factoryreset.rc \
+    init.recovery.mt6893.rc
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.emmc:$(TARGET_VENDOR_RAMDISK_OUT)/first_stage_ramdisk/fstab.emmc
